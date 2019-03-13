@@ -37,12 +37,16 @@ const UserSchema = mongoose.Schema({
             required: true
         }
     }]
+    ,filterIngre: {
+        type: Array,
+        default: ['beef', 'chicken', 'tofu']        
+    }
 })
 
 UserSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
-    return _.pick(userObject, ['_id', 'email'])
+    return _.pick(userObject, ['_id', 'name', 'email', 'filterIngre'])
 }
 
 UserSchema.methods.generateAuthToken = function () {

@@ -19,11 +19,11 @@ app.use(cors())
 app.get('/recipes', auth,(req, res) => {
     Recipe.find({
         _creator: req.user._id
-    }).then((todos) => { // todos는 array임
-        if(!todos) {
+    }).then((recipes) => {
+        if(!recipes) {
             res.send([])
         }
-        res.send({todos})   
+        res.send({recipes})   
     }, (e) => {             
         res.status(400).send(e)
     })  
@@ -32,14 +32,18 @@ app.get('/recipes', auth,(req, res) => {
 
 app.post('/recipes', auth,(req, res) => {
     const recipe = new Recipe({
-        text: req.body.text,
+        title: req.body.title,
+        type: req.body.type,
+        serving: req.body.serving,
+        mainIngre: req.body.mainIngre,
+        subIngre: req.body.subIngre,
         _creator: req.user._id
     })
 
     recipe.save().then(() => {
         res.send('Successfully saved ')
     }, (e) => {
-        res.status(400).send(e)
+        res.status(400).send('Hmm POST recipes request failed')
     })
 })
 
@@ -57,9 +61,8 @@ app.get('/recipes', auth,(req, res) => {
 app.post('/users', (req, res) => {
     const body = _.pick(req.body, ['name', 'email', 'password'])
     const user = new User(body)
-    // console.log(user) // 이 user는 _id, email, password있고 tokens 값만 [] 인 상태
     user.save().then(() => {  
-            return user.generateAuthToken()  // id + access + salt 조합으로 탄생, 값 뱉어내는 Promise임
+            return user.generateAuthToken()
         }).then((token) => {
             res.header('x-auth', token).send(user)
         }).catch((e) => {
@@ -71,11 +74,12 @@ app.post('/users/login', (req, res) => {
     const body = _.pick(req.body, ['email', 'password'])
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.header('x-auth', token).status(200).send(user)
+            res.send({token, user})
+            // res.send(token)
         })
     })
     .catch((e) => {
-        res.status(400).send(e)
+        res.status(400).send('no user')
     })
 })
 
