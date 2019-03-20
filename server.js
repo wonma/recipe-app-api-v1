@@ -35,11 +35,12 @@ app.post('/recipes', auth,(req, res) => {
         serving: req.body.serving,
         mainIngre: req.body.mainIngre,
         subIngre: req.body.subIngre,
+        text: req.body.text,
         _creator: req.user._id
     })
 
     recipe.save().then(() => {
-        res.send('Successfully saved ')
+        res.send('Successfully saved')
     }, (e) => {
         res.status(400).send('Hmm POST recipes request failed')
     })
@@ -53,18 +54,42 @@ app.get('/recipes', auth,(req, res) => {
     }, (e) => {             
         res.status(400).send(e)
     })  
-}) 
+})
+
+app.post('/recipes/:id', auth, (req, res) => {
+    const id = req.params.id
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send('id is invalidddddd')
+    }
+
+
+    Recipe.findOneAndUpdate({
+        _id:id,
+        _creator:req.user._id
+    }, { $set: req.body }, {new: true}).then((recipe) => {
+        if(!recipe) {
+            return res.status(404).send('recipe not found')
+        }
+        res.send({recipe})
+    }).catch((e) => {
+        res.status(400).send()
+    })
+})
+
 
 
 app.post('/users', (req, res) => {
     const body = _.pick(req.body, ['name', 'email', 'password'])
+    if(body.password !== req.body.passwordConfirm) {
+        return res.status(400).send('password error')
+    }
     const user = new User(body)
     user.save().then(() => {  
             return user.generateAuthToken()
         }).then((token) => {
-            res.header('x-auth', token).send(user)
+            res.send({token, user})
         }).catch((e) => {
-            res.status(400).send(e)
+            res.status(400).send(e.errors)
         })
 })
 
@@ -72,6 +97,8 @@ app.post('/users/login', (req, res) => {
     const body = _.pick(req.body, ['email', 'password'])
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
+            // const loginInfo = {token, user}
+            // console.log(user)
             res.send({token, user})
             // res.send(token)
         })
@@ -97,6 +124,69 @@ app.post('/users/me/ingres', auth, (req, res) => {
     })
 })
 
+
+app.post('/users/me/types', auth, (req, res) => {
+    const filterTypes = req.body.filterTypes.map((type) => {
+        return type.name
+    })
+    User.findOneAndUpdate({
+        _id:req.user._id
+    }, {$set: {filterType: filterTypes} }, {new: true}).then((user) => {
+        if(!user) {
+            return res.status(404).send('user not found')
+        }
+        res.send(user.filterType)
+    }).catch((e) => {
+        res.status(400).send('Something went wrong in server')
+    })
+})
+
+app.get('/recipes/:id', auth, (req, res) => {
+    const id = req.params.id
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send('id is invalidddddd')
+    } 
+
+    Recipe.findOne({
+        _id:id,
+        _creator: req.user._id
+    }).then((recipe) => {
+        if (!recipe) {
+            return res.status(404).send('hmm 404 error, ID not found')
+        }
+        res.send({recipe})
+    }).catch((e) => {
+        res.status(400).send('Bad request! Invalid ID')
+    })
+})
+
+
+app.delete('/recipes/:id', auth, (req, res) => {
+    const id = req.params.id
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send('id is invalidddddd')
+    } 
+
+    Recipe.findOneAndDelete({
+        _id:id,
+        _creator: req.user._id
+    }).then((recipe) => {
+        if (!recipe) {
+            return res.status(404).send('hmm 404 error, ID not found')
+        }
+        res.send({recipe})
+    }).catch((e) => {
+        res.status(400).send('Bad request! Invalid ID')
+    })
+})
+
+app.delete('/users/me/token', auth, (req, res) => {
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send()
+    }, () => {
+        res.status(400).send()
+    })
+})
 
 app.get('/', (req, res) => {
     res.json('hahaha')

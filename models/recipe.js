@@ -20,6 +20,12 @@ const Recipe = mongoose.model('Recipe', {
         type: Number,        
         default: 1
     },
+    text: {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
     mainIngre: [{
         name: {
             type: String,
@@ -29,7 +35,7 @@ const Recipe = mongoose.model('Recipe', {
         },
         amount: {
             type: String,
-            required: false
+            required: true
         }
     }],
     subIngre: [{
@@ -41,7 +47,7 @@ const Recipe = mongoose.model('Recipe', {
         },
         amount: {
             type: String,
-            required: false
+            required: true
         }
     }],
     matchRate: {

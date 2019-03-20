@@ -25,7 +25,11 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 6
+        validate: {
+            validator: function (v) {return v.length >= 6},
+            message: `password length error`
+        }
+        // minlength: 6
     },
     tokens: [{
         access: {
@@ -41,12 +45,17 @@ const UserSchema = mongoose.Schema({
         type: Array,
         default: ['beef', 'chicken', 'tofu']        
     }
+    ,filterType: {
+        type: Array,
+        default: ['any', 'grilled', 'topped-rice', 'soup']        
+    }
 })
 
-UserSchema.methods.toJSON = function () {
+UserSchema.methods.toJSON = function () { //이거는 response로 넘겼을 때 front-end에서 받아보는 obj정보를 필터링함.
     const user = this
     const userObject = user.toObject()
-    return _.pick(userObject, ['_id', 'name', 'email', 'filterIngre'])
+    console.log('toJson Working')
+    return _.pick(userObject, ['_id', 'name', 'email', 'filterIngre', 'filterType'])
 }
 
 UserSchema.methods.generateAuthToken = function () {
