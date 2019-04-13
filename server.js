@@ -89,7 +89,7 @@ app.post('/users', (req, res) => {
         }).then((token) => {
             res.send({token, user})
         }).catch((e) => {
-            res.status(400).send(e.errors)
+            res.status(400).send(e)
         })
 })
 
@@ -97,14 +97,11 @@ app.post('/users/login', (req, res) => {
     const body = _.pick(req.body, ['email', 'password'])
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            // const loginInfo = {token, user}
-            // console.log(user)
             res.send({token, user})
-            // res.send(token)
         })
     })
     .catch((e) => {
-        res.status(400).send('no user')
+        res.status(400).send(e)
     })
 })
 
@@ -195,4 +192,6 @@ app.get('/', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port`)
 })
+
+
 

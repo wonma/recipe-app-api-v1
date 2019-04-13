@@ -19,7 +19,7 @@ const UserSchema = mongoose.Schema({
         unique: true,
         validate: {
             validator: validator.isEmail,
-            message: `{value} is not a valid email`
+            message: `invalid-email`
         }
     },
     password: {
@@ -27,7 +27,7 @@ const UserSchema = mongoose.Schema({
         required: true,
         validate: {
             validator: function (v) {return v.length >= 6},
-            message: `password length error`
+            message: `password-length-error`
         }
         // minlength: 6
     },
@@ -103,10 +103,10 @@ UserSchema.statics.findByCredentials = function (email, password) {
     const User = this
     return User.findOne({email}).then((user) => {
         if (!user) {
-            return Promise.reject()
+            return Promise.reject({message:'No existing user'})
         }
         return bcrypt.compare(password, user.password).then((res) => {
-            return res ? user : Promise.reject()
+            return res ? user : Promise.reject({message:'Wrong password'})
         })
     })
 }
