@@ -35,7 +35,7 @@ const Recipe = mongoose.model('Recipe', {
         },
         amount: {
             type: String,
-            required: true
+            trim: true
         }
     }],
     subIngre: [{
@@ -47,7 +47,7 @@ const Recipe = mongoose.model('Recipe', {
         },
         amount: {
             type: String,
-            required: true
+            trim: true
         }
     }],
     matchRate: {
