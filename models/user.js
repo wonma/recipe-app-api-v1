@@ -62,7 +62,7 @@ UserSchema.methods.generateAuthToken = function () {
     const user = this
 
     const access = 'auth'
-    const token = jwt.sign({_id: user._id.toHexString(), access:access}, 'abc123').toString()
+    const token = jwt.sign({_id: user._id.toHexString(), access:access}, process.env.JWT_SECRET).toString()
     // token에는 id와 access값이 encoded 되게 됨.
     // 차후에 findOne으로 유저를 fetch해 올 때 기준들로 id, access, token자체 3개를 확인하게 됨.
 

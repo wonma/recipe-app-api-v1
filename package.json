@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "env-cmd --file ./config/dev.env nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
+    "env-cmd": "^9.0.1",
     "nodemon": "^1.18.9"
   }
 }
