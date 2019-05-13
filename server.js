@@ -29,8 +29,8 @@ const { Recipe } = require('./models/recipe')
 const { User } = require('./models/user')
 const { auth } = require('./middleware/auth')
 
-app.get('/', (req, res) => {
-    res.render('index.hbs')
+app.get('', (req, res) => {
+    res.render('index')
 })
 
 app.get('/recipes', auth,(req, res) => {
@@ -117,7 +117,7 @@ app.post('/users/login', (req, res) => {
     const body = _.pick(req.body, ['email', 'password'])
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.send({token, user})
+            res.render('main', {token, user})
         })
     })
     .catch((e) => {

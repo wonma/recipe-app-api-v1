@@ -1,5 +1,6 @@
 //-----------------------   Sign-up Modal   -----------------------//
 const modal = document.querySelector('#modal')
+const appURL = 'http://localhost:3000/'
 
 // Open Sign-up
 document.getElementById('open-modal').addEventListener('click', () => {
@@ -70,7 +71,7 @@ document.querySelector('#register-form').addEventListener('submit', (e) => {
         return false
     } 
 
-    fetch('https://ingre-app.herokuapp.com/users/', {
+    fetch(appURL +'users/', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -108,7 +109,7 @@ document.querySelector('#login-form').addEventListener('submit', (e) => {
     e.preventDefault()
     const [email, password] = e.target.elements
     
-    fetch('https://ingre-app.herokuapp.com/users/login', {
+    fetch(appURL + 'users/login', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -131,7 +132,7 @@ document.querySelector('#login-form').addEventListener('submit', (e) => {
             fillLocalStorage(loginInfo)
 
             // Router Change to Main Page
-            location.assign(`/main.html`)
+            //location.assign(`/main.html`)
         })
         .catch(err => {console.log(err)})
 })
