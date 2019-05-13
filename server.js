@@ -1,20 +1,20 @@
 const express = require('express')
 const path = require('path')
-
+console.log('asdfasdf')
 const bodyParser = require('body-parser')
 const _ = require('lodash')
-// const hbs = require('hbs')
+const hbs = require('hbs')
 // const bcrypt = require('bcryptjs') 
 const cors = require('cors')
 const app = express()
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, './public')
-// const viewsPath = path.join(__dirname, './views')
+const viewsPath = path.join(__dirname, './views')
 
 // Setup handlebars engine and views location
-// app.set('view engine', 'hbs')
-// app.set('views', viewsPath)
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
 console.log('haha111')
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
@@ -29,9 +29,9 @@ const { Recipe } = require('./models/recipe')
 const { User } = require('./models/user')
 const { auth } = require('./middleware/auth')
 
-// app.get('', (req, res) => {
-//     res.render('index')
-// })
+app.get('/', (req, res) => {
+    res.render('index.hbs')
+})
 
 app.get('/recipes', auth,(req, res) => {
     Recipe.find({
@@ -203,10 +203,6 @@ app.delete('/users/me/token', auth, (req, res) => {
     }, () => {
         res.status(400).send()
     })
-})
-
-app.get('/', (req, res) => {
-    res.json('hahaha')
 })
 
 app.listen(process.env.PORT || 3000, () => {
