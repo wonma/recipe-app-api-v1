@@ -15,7 +15,7 @@ const publicDirectoryPath = path.join(__dirname, './public')
 // Setup handlebars engine and views location
 // app.set('view engine', 'hbs')
 // app.set('views', viewsPath)
-
+console.log('haha111')
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
@@ -45,6 +45,7 @@ app.get('/recipes', auth,(req, res) => {
         res.status(400).send(e)
     })  
 }) 
+console.log('haha')
 
 
 app.post('/recipes', auth,(req, res) => {
