@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack --mode production",
-    "dev-server": "webpack-dev-server --open --mode development",
     "dev": "env-cmd --file ./config/dev.env nodemon server.js"
   },
   "keywords": [],
