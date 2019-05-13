@@ -1,6 +1,5 @@
 //-----------------------   Sign-up Modal   -----------------------//
 const modal = document.querySelector('#modal')
-const appURL = 'http://localhost:3000/'
 
 // Open Sign-up
 document.getElementById('open-modal').addEventListener('click', () => {
@@ -71,7 +70,7 @@ document.querySelector('#register-form').addEventListener('submit', (e) => {
         return false
     } 
 
-    fetch(appURL +'users/', {
+    fetch('https://ingre-app.herokuapp.com/users/', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -109,7 +108,7 @@ document.querySelector('#login-form').addEventListener('submit', (e) => {
     e.preventDefault()
     const [email, password] = e.target.elements
     
-    fetch(appURL + 'users/login', {
+    fetch('https://ingre-app.herokuapp.com/users/login', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
