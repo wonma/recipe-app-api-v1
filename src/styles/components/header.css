@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 6rem;
+
+    &__icon {
+        width: calc(71px * 1);
+        height: calc(34px * 1);   
+    }
+
+    &__logout {
+        color: var(--color-grey-light-2);
+        margin-top: 4px;
+    }
+}

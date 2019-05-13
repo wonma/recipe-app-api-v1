@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script>
+        const token = localStorage.getItem('x-auth')
+        if (token) {
+            location.assign('main.html')
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <h1 class="logo__icon">
+                <svg viewBox="0 0 71 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                    <title>ic-logo</title>
+                    <desc>Created with Sketch.</desc>
+                    <g id="index.html" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="sign-in" transform="translate(-119.000000, -75.000000)">
+                            <g id="Logo-block" transform="translate(65.000000, 75.000000)">
+                                <g id="ic-logo" transform="translate(54.000000, 0.000000)">
+                                    <text id="ngre" font-family="Lato-Regular, Lato" font-size="26" font-weight="normal" fill="#5FC47D">
+                                        <tspan x="20" y="29">ngre</tspan>
+                                    </text>
+                                    <g id="loco-icon">
+                                        <rect id="Rectangle" fill="#5FC47D" x="0" y="0" width="19" height="12"></rect>
+                                        <rect id="Rectangle-Copy-3" fill="#5FC47D" x="0" y="14" width="19" height="17"></rect>
+                                        <rect id="Rectangle" fill="#FFFFFF" x="14" y="6" width="2" height="3"></rect>
+                                        <rect id="Rectangle-Copy-4" fill="#FFFFFF" x="14" y="17" width="2" height="11"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </h1>
+            <p class="logo__phrase">Check your <span class="text--point">fridge</span> and choose a <span class="text--point">recipe</span>!</p>
+        </div>
+        <div class="form-wrapper">
+            <h2 class="form__title">Welcome!</h2>
+            <form id="login-form" class="form">
+                <div class="form__group">
+                    <input class="form__input" id="email" type="email" name="email" placeholder="Email"
+                    autocomplete="email">
+                    <label class="form__label">Email</label>
+                </div>
+                <div class="form__group">
+                    <input class="form__input" id="password" type="password" name="current-password"
+                    placeholder="password" autocomplete="Password">
+                    <label class="form__label">Password</label>
+                </div>
+                <div id="loginError" class="form__error"></div>
+                <div class="form__group">
+                    <button class="btn-cta" id="go-to-main" type="submit">LOG IN</button>
+                </div>
+                <a href="#" id="open-modal" class="btn-extra">No id? create here!</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal__inner">
+            <div id="modal-close" class="modal__btn-close">
+                <span class="modal__btn-close--line"></span>
+                <span class="modal__btn-close--line modal__btn-close--line-after"></span>
+            </div>
+            <div class="form-wrapper">
+                <h2 class="form__title">Create a new id!</h2>
+                <form id="register-form" class="form">
+                    <div class="form__group">
+                        <input class="form__input" id="r-userName" placeholder="Username" type="text" name="userName" autocomplete="username">
+                        <label class="form__label">Username</label>
+                    </div>
+                    <div class="form__group">
+                        <input class="form__input" id="r-email" placeholder="Email" type="email" name="email" autocomplete="email">
+                        <label class="form__label">Email</label>
+                    </div>
+                    <div class="form__group">
+                        <input class="form__input" id="r-password" placeholder="Password" type="password" name="password" autocomplete="new-password">
+                        <label class="form__label">Password</label>
+                    </div>
+                    <div class="form__group">
+                        <input class="form__input" id="r-password-confirm" placeholder="Password Confirmation" type="password" name="passwordConfirm" autocomplete="new-password">
+                        <label class="form__label">Password Confirmation</label>
+                    </div>
+                    <div class="form__group">
+                        <button id="r-register-btn" class="btn-cta" type="submit">CREATE</button>
+                    </div>
+                    <div id="errorMessage" class="form__error"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./scripts/index-bundle.js"></script>
+</body>
+</html>

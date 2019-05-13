@@ -1,0 +1,93 @@
+.btn-cta {
+    background-color: var(--color-primary);
+    height: 5.2rem;
+    color: #fff;
+    font-size: 1.3rem;
+    border:none;
+    border-radius: 4px;
+    transition: all 1s ease-out;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--color-primary-darker);
+    }
+
+    &--delete {
+        width: 5rem;
+        border: 1px solid var(--color-grey-light-1);
+        background-color: transparent;
+        transition: all .5s ease;
+
+        &:hover {
+            border: 1px solid var(--color-grey-light-2);
+            cursor: pointer;
+        }
+    }
+
+    &--edit {
+        width: 30%;
+        margin-left: 1rem;
+    }
+}
+
+.btn-extra {
+    margin-top: 1.4rem;
+    border-bottom: 1px solid var(--color-primary);
+    align-self: end;
+}
+
+.btn-round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right:1.8rem;
+    bottom:1.8rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 6.5px 16px;
+    transition: all .2s ease-out;
+
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-.5rem);
+    }
+
+    &__icon { /* span */
+        position: relative;
+        display: block;
+        width: 22px;
+        height: 22px;
+    }
+
+    &--line {
+        content:"";
+        position: absolute;
+        top:7.5px;
+        left:0px;
+        width: 22px;
+        height: 2px;
+        background-color: #fff;
+        transition: all .3s ease;
+    }
+
+    &--line-after {
+        transform: rotate(90deg);
+    }
+
+    &--back {
+        left:1.8rem;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.15) 2px 6.5px 30px;
+        & > span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(-1px);
+        }
+    }
+}
+
+

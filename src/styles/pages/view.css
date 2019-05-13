@@ -1,0 +1,114 @@
+
+.view {
+    &__title {
+        font-weight: 300;
+        font-size: 4rem;
+        margin-top: 4rem;
+    }
+
+    &__info {
+        display: flex;
+        color: #999;
+
+        &-type {
+            margin-right: 1.5rem;
+        }
+
+        &-serving {
+            margin-right: .4rem;
+        }
+    }
+
+    &__2-col {
+        margin-top: 3rem;
+        @mixin atLarge {
+            display: flex;
+            align-items: flex-start;
+        }    
+    }
+
+    &__ingres {
+        & > div {
+            flex-grow: 1;
+            margin-bottom: 3rem;
+        }
+
+        @mixin atMedium {
+            display: flex;
+        }
+
+        &-main {
+            @mixin atMedium {
+                margin-right: 2rem;
+            } 
+            @mixin atLarge {
+                margin-right: 0;
+            } 
+        }
+
+        @mixin atLarge {
+            display: flex;
+            flex-direction: column;
+            min-width: 35%;
+            margin-right: 4rem;
+        }
+    }
+
+
+
+    &__ingre {
+        border-bottom: 1px solid #ededed;
+        display: flex;
+        margin-bottom: .5rem;
+        padding: .3rem .5rem;
+        color: var(--color-grey-dark-3);
+
+        &-name {
+            display: block;
+            width: 45%;
+            margin-right:3%;
+            flex-shrink: 0;
+            @mixin atMedium {
+                width: 57%;
+            }
+        }
+
+        &-amount {
+            width: 50%;
+        }
+    }
+
+    &__subTitle {
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+    }
+
+    &__body {
+        width: 100%;
+
+        &-input {
+            display: block;
+            width: 100%;
+            border: 1px solid var(--color-grey-light-1);
+            padding: 1rem;
+            font-size: 1.6rem;
+            color: var(--color-grey-dark-3);
+        }
+
+        &-cta {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: flex-end; 
+            margin-bottom: 3rem;
+            
+            & > button {
+                display: block;
+            }
+
+        }
+    }
+}
+
+.white-space-pre {
+    white-space: pre-wrap;
+}

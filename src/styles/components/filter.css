@@ -1,0 +1,222 @@
+.filters {
+    margin-top: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 6px 0px;
+    border-radius: 4px;
+    padding: 0rem 2rem;
+}
+
+.filter {
+    &-wrapper {
+        border: none;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    &__intro {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.4rem;
+
+        &-title {
+            flex-grow: 0;
+            font-size: 1.6rem;
+            color: var(--color-primary);
+            font-weight: 400;
+        }
+
+        &-edit {
+            cursor: pointer;
+            border: none;
+            padding: 1rem;
+            /* color:#fff;
+            background-color: var(--color-primary); */
+            border-radius: 4px;
+            margin-left: 1rem;
+            flex-grow: 0;
+        }
+    }
+
+    &__items {
+        display: flex; 
+        position: relative;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        position: relative; 
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        background-color: #fff;
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    &__checkbox {
+        position: absolute; 
+        z-index: -1;
+    }
+
+    &__name {
+        position: relative; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        width: 100%; 
+        height: 100%;
+        flex-shrink: 0;
+        padding: 1.2rem;
+        border: 1px solid var(--color-grey-light-3);
+        border-radius: 4px;
+
+        background-color: #fff; 
+        color: #666;
+        font-size: 1.3rem;
+
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+
+        &:hover{
+            cursor: pointer;
+            border: 1px solid var(--color-primary);
+            
+            .isEditOn &{
+               border: 1px solid var(--color-grey-light-3);
+            }
+        }
+
+    }
+
+    &__item--edit > &__name {
+        padding: 1.2rem 3.3rem 1.3rem 1.2rem
+    }
+
+    &__name--checked {
+        background-color: var(--color-primary);
+        color: #fff;
+        border: 1px solid var(--color-primary);
+
+    }
+
+    &__delete {
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 9px;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    
+    &__name-radio {
+        display: flex;
+    }
+
+
+}
+
+
+.newIngreForm, .newTypeForm {
+    display: none;
+    width: 100%;
+    border: 1px solid var(--color-grey-light-3);
+    border-radius: 4px;
+    position: relative;
+    padding: 0rem 2rem;
+
+    & > button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.6rem;
+        padding: .6rem;
+        background-color: transparent;
+        color: var(--color-primary);
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.newIngreInput, .newTypeInput {
+    padding: 1.5rem 0rem;
+    border: none;
+    width: 100%;
+    font-size: 1.6rem;
+    &:focus {
+        outline: none;
+    }
+}
+
+
+.isEditOn.newIngreForm,
+.isEditOn.newTypeForm {
+    display: flex;
+}
+
+
+.filter__radio:checked,
+.filter__radio:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+.filter__radio-label{
+    position: relative;
+    cursor: pointer;
+    line-height: 20px;
+    display: flex;
+    color: #666;
+    
+    &-text {
+        padding-left: 24px;
+        color: #666666;
+        font-size: 1.3rem;
+    }
+}
+
+
+.psuedo-radio {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.psuedo-radio::before{
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.psuedo-radio::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    position: absolute;
+    border-radius: 100%;
+    transition: all 0.4s ease;
+}
+
+.filter__radio:not(:checked) + label > .psuedo-radio::after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.filter__radio:checked + label > .psuedo-radio::after {
+    opacity: 1;
+    transform: scale(1);
+}

@@ -1,18 +1,37 @@
 const express = require('express')
+const path = require('path')
+
 const bodyParser = require('body-parser')
-const _ = require('lodash') 
-const bcrypt = require('bcryptjs') 
+const _ = require('lodash')
+// const hbs = require('hbs')
+// const bcrypt = require('bcryptjs') 
 const cors = require('cors')
 const app = express()
+
+// Define paths for Express config
+const publicDirectoryPath = path.join(__dirname, './public')
+// const viewsPath = path.join(__dirname, './views')
+
+// Setup handlebars engine and views location
+// app.set('view engine', 'hbs')
+// app.set('views', viewsPath)
+
+// Setup static directory to serve
+app.use(express.static(publicDirectoryPath))
+
 app.use(bodyParser.json())
 app.use(cors())
 
 const { ObjectID } = require('mongodb')
-const { mongoose } = require('./db/mongoose')
+// const { mongoose } = require('./db/mongoose')
 
 const { Recipe } = require('./models/recipe')
 const { User } = require('./models/user')
 const { auth } = require('./middleware/auth')
+
+// app.get('', (req, res) => {
+//     res.render('index')
+// })
 
 app.get('/recipes', auth,(req, res) => {
     Recipe.find({

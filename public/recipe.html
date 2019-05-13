@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">    <title>Recipe page</title> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script>
+        const token = localStorage.getItem('x-auth')
+        if (!token) {
+            location.assign('index.html')
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="header__icon">
+                <svg viewBox="0 0 71 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                    <title>ic-logo</title>
+                    <desc>Created with Sketch.</desc>
+                    <g id="index.html" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="sign-in" transform="translate(-119.000000, -75.000000)">
+                            <g id="Logo-block" transform="translate(65.000000, 75.000000)">
+                                <g id="ic-logo" transform="translate(54.000000, 0.000000)">
+                                    <text id="ngre" font-family="Lato-Regular, Lato" font-size="26" font-weight="normal" fill="#5FC47D">
+                                        <tspan x="20" y="29">ngre</tspan>
+                                    </text>
+                                    <g id="loco-icon">
+                                        <rect id="Rectangle" fill="#5FC47D" x="0" y="0" width="19" height="12"></rect>
+                                        <rect id="Rectangle-Copy-3" fill="#5FC47D" x="0" y="14" width="19" height="17"></rect>
+                                        <rect id="Rectangle" fill="#FFFFFF" x="14" y="6" width="2" height="3"></rect>
+                                        <rect id="Rectangle-Copy-4" fill="#FFFFFF" x="14" y="17" width="2" height="11"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </h1>
+            <a href="#" class="header__logout" id="logout">Log out</a>
+        </header>
+
+        <!-- CTA Back to Main -->
+        <a class="btn-round btn-round--back" href="./main.html">
+            <span class="btn-round__icon">
+                <svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                    <title>chevron left</title>
+                    <desc>Created with Sketch.</desc>
+                    <g id="index.html" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.54">
+                        <g id="recipe-page" transform="translate(-45.000000, -1061.000000)" fill="#000000">
+                            <g id="Material/Icons-black/chevron-left" transform="translate(37.000000, 1055.000000)">
+                                <polygon id="Shape" points="15.4 7.4 14 6 8 12 14 18 15.4 16.6 10.8 12"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </span>
+        </a>
+
+        <!-- Intro : Title and basic Info -->
+        <div class="view__intro">
+            <h2 id="viewTitle" class="view__title"></h2>
+            <div class="view__info">
+                <p>
+                    <span id="viewType" class="view__info-type"></span>
+                </p>
+                <p>
+                    <span id="viewServing" class="view__info-serving"></span>serving(s)
+                </p>
+            </div>
+        </div>
+
+        <!-- Body : Ingredients and Directions -->
+        <div class="view__2-col">
+            <div class="view__ingres">
+                <div class="view__ingres-main">
+                    <h3 class="view__subTitle">Main Ingredients</h3>
+                    <ul id="mainIngreArea"></ul>
+                </div>
+                <div class="view__ingres-sub">
+                    <h3 class="view__subTitle">Sub Ingredients</h3>
+                    <ul id="subIngreArea"></ul>
+                </div>
+            </div>
+            <div class="view__body">
+                <h3 class="view__subTitle">Directions</h3>
+                <div id="viewBody" class="white-space-pre view__body-input"></div>
+            </div>
+        </div>
+
+        <!-- CTA : Delete and Edit -->
+        <div class="view__body-cta">
+            <button id="" class="btn-cta--delete" type="button">
+                <svg width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                    <title>Shape</title>
+                    <desc>Created with Sketch.</desc>
+                    <g id="index.html" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="recipe-page" transform="translate(-41.000000, -837.000000)" fill="#C2C2C2">
+                            <path d="M55,838 L51.5,838 L50.5,837 L45.5,837 L44.5,838 L41,838 L41,840 L55,840 L55,838 Z M42,853 C42,854.104569 42.8954305,855 44,855 L52,855 C53.1045695,855 54,854.104569 54,853 L54,841 L42,841 L42,853 Z"
+                                id="Shape"></path>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+            <button id="view__btn-edit" class="btn-cta btn-cta--edit" type="button">Edit</button>
+        </div>
+    </div>
+    <script src="./scripts/view-bundle.js"></script>
+</body>
+
+</html>

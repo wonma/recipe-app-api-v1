@@ -1,0 +1,28 @@
+.section-title {
+    font-size: 2.4rem;
+    font-weight: 300;
+    width: 70%;
+    color: var(--color-grey-dark-3);
+    line-height: 1.4;
+    margin-top: 4rem;
+}
+
+.recipe-list {
+    margin-top: 5rem;
+    margin-bottom: 10rem;
+    margin-right: -1rem;
+
+    &__title {
+        font-size: 2rem;
+        color: var(--color-primary);
+        font-weight: 400;   
+    }
+
+    &__result {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
