@@ -6,7 +6,7 @@ const token = localStorage.getItem('x-auth')
 const username = localStorage.getItem('user')
 
 // Block access if without token
-if(!token) {location.assign('index.html')}
+if(!token) {location.assign('/index')}
 
 // Display Username
 document.querySelector('#username').textContent = username
@@ -35,7 +35,7 @@ const addFilterItem = (editState, filterName) => {
         items = { filterTypes: updatedTypes }
     }
 
-    fetch(`https://ingre-app.herokuapp.com/users/me/${filterName + 's'}`, {
+    fetch(`http://localhost:3000/users/me/${filterName + 's'}`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ document.querySelector('#add-type').addEventListener('click', (e) => {
 
 let getRecipes = []
 
-fetch('https://ingre-app.herokuapp.com/recipes', {
+fetch('http://localhost:3000/recipes', {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ fetch('https://ingre-app.herokuapp.com/recipes', {
 
 // Log out 
 document.querySelector('#logout').addEventListener('click', (e) => {
-    fetch('https://ingre-app.herokuapp.com/users/me/token', {
+    fetch('http://localhost:3000/users/me/token', {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json',
@@ -158,12 +158,12 @@ document.querySelector('#logout').addEventListener('click', (e) => {
     })
         .then(response => {
             localStorage.clear()
-            location.assign(`/index.html`)
+            location.assign(`/index`)
             
         })
 })
 
 // Creating new recipe button
 document.querySelector('#add-new').addEventListener('click', (e) => {
-    location.assign(`/edit.html`)
+    location.assign(`/edit`)
 })

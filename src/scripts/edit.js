@@ -118,7 +118,7 @@ renderType()
 //-----------------------  Populating input fields   -----------------------//
 if (recipeID.length > 0) { // hash 있음 (기존 Recipe 편집)
 
-    fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
+    fetch(`http://localhost:3000/recipes/${recipeID}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -234,7 +234,7 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
         if (body.text.length === 0) {throw new Error('empty body')}
 
         if (pageMode === 'createMode') {
-            fetch(`https://ingre-app.herokuapp.com/recipes/`, {
+            fetch(`http://localhost:3000/recipes/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -243,13 +243,13 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
                 body: JSON.stringify(body)
             })
             .then((res) => {
-                location.assign(`/main.html`)
+                location.assign(`/main`)
             }).catch((e) => {
                 console.log('Hmm fetch failed')
             })
 
         } else {
-            fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
+            fetch(`http://localhost:3000/recipes/${recipeID}`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -259,7 +259,7 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
             })
                 .then(response => response.json())
                 .then((res) => {
-                    location.assign(`/main.html`)
+                    location.assign(`/main`)
                 }).catch((e) => {
                     console.log('Hmm fetch failed')
                 })
@@ -279,14 +279,14 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
 document.querySelector('#edit-delete').addEventListener('click', (e) => {
     const deleteConfirm = confirm("Want to delete?");
     if (deleteConfirm) {
-        fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
+        fetch(`http://localhost:3000/recipes/${recipeID}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
                 'x-auth': token
             }
         }).then((res) => {
-            location.assign(`/main.html`)
+            location.assign(`/main`)
         })
         .catch((e) => {
             console.log('Deleting request failed')

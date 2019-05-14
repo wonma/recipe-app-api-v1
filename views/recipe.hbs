@@ -10,7 +10,7 @@
     <script>
         const token = localStorage.getItem('x-auth')
         if (!token) {
-            location.assign('index.html')
+            location.assign('/index')
         }
     </script>
 </head>
@@ -47,7 +47,7 @@
         </header>
 
         <!-- CTA Back to Main -->
-        <a class="btn-round btn-round--back" href="./main.html">
+        <a class="btn-round btn-round--back" href="/main">
             <span class="btn-round__icon">
                 <svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
@@ -97,7 +97,7 @@
 
         <!-- CTA : Delete and Edit -->
         <div class="view__body-cta">
-            <button id="" class="btn-cta--delete" type="button">
+            <button id="view__btn-delete" class="btn-cta--delete" type="button">
                 <svg width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->

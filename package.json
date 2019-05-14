@@ -5,12 +5,23 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "env-cmd --file ./config/dev.env nodemon server.js"
+    "dev": "env-cmd --file ./config/dev.env nodemon server.js",
+    "dev-server": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "4.19.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-stream": "^5.2.1",
     "bcrypt": "^3.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",

@@ -1,10 +1,8 @@
 const express = require('express')
 const path = require('path')
-console.log('asdfasdf')
 const bodyParser = require('body-parser')
 const _ = require('lodash')
 const hbs = require('hbs')
-// const bcrypt = require('bcryptjs') 
 const cors = require('cors')
 const app = express()
 
@@ -12,10 +10,11 @@ const app = express()
 const publicDirectoryPath = path.join(__dirname, './public')
 const viewsPath = path.join(__dirname, './views')
 
+const PORT = process.env.PORT || 3000
 // Setup handlebars engine and views location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
-console.log('haha111')
+
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
@@ -23,14 +22,29 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const { ObjectID } = require('mongodb')
-// const { mongoose } = require('./db/mongoose')
-
+const { mongoose } = require('./db/mongoose')
 const { Recipe } = require('./models/recipe')
 const { User } = require('./models/user')
 const { auth } = require('./middleware/auth')
 
 app.get('', (req, res) => {
     res.render('index')
+})
+
+app.get('/index', (req, res) => {
+    res.render('index')
+})
+
+app.get('/main', (req, res) => {
+    res.render('main')
+})
+
+app.get('/edit', (req, res) => {
+    res.render('edit')
+})
+
+app.get('/recipe', (req, res) => {
+    res.render('recipe')
 })
 
 app.get('/recipes', auth,(req, res) => {
@@ -45,7 +59,6 @@ app.get('/recipes', auth,(req, res) => {
         res.status(400).send(e)
     })  
 }) 
-console.log('haha')
 
 
 app.post('/recipes', auth,(req, res) => {
@@ -117,7 +130,7 @@ app.post('/users/login', (req, res) => {
     const body = _.pick(req.body, ['email', 'password'])
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.render('main', {token, user})
+            res.send({token, user})
         })
     })
     .catch((e) => {
@@ -205,8 +218,8 @@ app.delete('/users/me/token', auth, (req, res) => {
     })
 })
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log(`app is running on port`)
+app.listen(PORT, () => {
+    console.log(`app is running on port ${PORT}`)
 })
 
 

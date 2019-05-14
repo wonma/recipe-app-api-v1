@@ -2,7 +2,7 @@ const recipeID = location.hash.substring(1)
 const token = localStorage.getItem('x-auth')
 
 if (recipeID.length > 0) {
-    fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
+    fetch(`http://localhost:3000/recipes/${recipeID}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -75,10 +75,28 @@ if (recipeID.length > 0) {
             // Edit btn
             const editBtn = document.querySelector('#view__btn-edit')
             editBtn.addEventListener('click', () => {
-                location.assign(`/edit.html#${theRecipe._id}`)
+                location.assign(`/edit#${theRecipe._id}`)
             })
         })
 
 }
 
+// 'Delete' Button
+document.querySelector('#view__btn-delete').addEventListener('click', (e) => {
+    const deleteConfirm = confirm("Want to delete?");
+    if (deleteConfirm) {
+        fetch(`http://localhost:3000/recipes/${recipeID}`, {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth': token
+            }
+        }).then((res) => {
+            location.assign(`/main`)
+        })
+            .catch((e) => {
+                console.log('Deleting request failed')
+            })
+    }
+})
 

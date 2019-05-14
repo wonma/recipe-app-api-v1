@@ -5,7 +5,7 @@ const getRecipeDOM = (recipe) => {
     const recipeLi = document.createElement('li')
     const recipeA = document.createElement('a')
     recipeA.classList.add('recipe__link')
-    recipeA.setAttribute('href', `/recipe.html#${recipe._id}`) // 보는 링크
+    recipeA.setAttribute('href', `/recipe#${recipe._id}`) // 보는 링크
     recipeLi.appendChild(recipeA)
     recipeLi.classList.add('recipe')
 
@@ -82,7 +82,9 @@ const getRecipeDOM = (recipe) => {
     const editEl = document.createElement('a')
     editEl.textContent = 'edit'
     editEl.classList.add('recipe__edit')
-    editEl.setAttribute('href', `/edit.html#${recipe._id}`) // 수정하는 링크
+    editEl.setAttribute('href', `/edit#${recipe._id}`) // hbs이후의 수정된 링크
+    editEl.setAttribute('data-recipeID', recipe._id)
+    // editEl.setAttribute('href', `/edit.html#${recipe._id}`) // hbs이전의 수정하는 링크
 
     // Message + Button Combining
     const rowBox = document.createElement('div')
