@@ -118,7 +118,7 @@ renderType()
 //-----------------------  Populating input fields   -----------------------//
 if (recipeID.length > 0) { // hash 있음 (기존 Recipe 편집)
 
-    fetch(`http://localhost:3000/recipes/${recipeID}`, {
+    fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -234,7 +234,7 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
         if (body.text.length === 0) {throw new Error('empty body')}
 
         if (pageMode === 'createMode') {
-            fetch(`http://localhost:3000/recipes/`, {
+            fetch(`https://ingre-app.herokuapp.com/recipes/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
             })
 
         } else {
-            fetch(`http://localhost:3000/recipes/${recipeID}`, {
+            fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -279,7 +279,7 @@ document.querySelector('#edit-form').addEventListener('submit', (e) => {
 document.querySelector('#edit-delete').addEventListener('click', (e) => {
     const deleteConfirm = confirm("Want to delete?");
     if (deleteConfirm) {
-        fetch(`http://localhost:3000/recipes/${recipeID}`, {
+        fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
