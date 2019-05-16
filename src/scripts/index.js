@@ -70,7 +70,7 @@ document.querySelector('#register-form').addEventListener('submit', (e) => {
         return false
     } 
 
-    fetch('https://ingre-app.herokuapp.com/users/', {
+    fetch('/users/', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -108,7 +108,7 @@ document.querySelector('#login-form').addEventListener('submit', (e) => {
     e.preventDefault()
     const [email, password] = e.target.elements
     console.log('haha')
-    fetch('https://ingre-app.herokuapp.com/users/login', {
+    fetch('/users/login', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

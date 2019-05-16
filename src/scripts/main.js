@@ -108,7 +108,7 @@ document.querySelector('#add-type').addEventListener('click', (e) => {
 
 let getRecipes = []
 
-fetch('https://ingre-app.herokuapp.com/recipes', {
+fetch('/recipes', {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ fetch('https://ingre-app.herokuapp.com/recipes', {
 
 // Log out 
 document.querySelector('#logout').addEventListener('click', (e) => {
-    fetch('https://ingre-app.herokuapp.com/users/me/token', {
+    fetch('/users/me/token', {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json',

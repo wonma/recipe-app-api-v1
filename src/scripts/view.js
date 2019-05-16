@@ -2,7 +2,7 @@ const recipeID = location.hash.substring(1)
 const token = localStorage.getItem('x-auth')
 
 if (recipeID.length > 0) {
-    fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
+    fetch(`/recipes/${recipeID}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ if (recipeID.length > 0) {
 document.querySelector('#view__btn-delete').addEventListener('click', (e) => {
     const deleteConfirm = confirm("Want to delete?");
     if (deleteConfirm) {
-        fetch(`https://ingre-app.herokuapp.com/recipes/${recipeID}`, {
+        fetch(`/recipes/${recipeID}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',

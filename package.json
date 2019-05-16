@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "env-cmd --file ./config/dev.env nodemon server.js",
-    "dev-server": "webpack-dev-server --open --mode development",
+    "dev-server": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "keywords": [],
