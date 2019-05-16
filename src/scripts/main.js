@@ -35,7 +35,7 @@ const addFilterItem = (editState, filterName) => {
         items = { filterTypes: updatedTypes }
     }
 
-    fetch(`https://ingre-app.herokuapp.com/users/me/${filterName + 's'}`, {
+    fetch(`/users/me/${filterName + 's'}`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
