@@ -18,7 +18,8 @@ document.querySelector('#username').textContent = username
 renderItemFilter(editState.ingre, 'ingre')
 renderItemFilter(editState.type, 'type')
 
-const addFilterItem = (editState, filterName) => {
+// Activate or Deactivate Edit mode
+const addFilterItem = (eachEditState, filterName) => {
     let items;
 
     if (filterName === 'ingre') {
@@ -63,7 +64,7 @@ const addFilterItem = (editState, filterName) => {
                 })
                 localStorage.setItem('filterTypes', JSON.stringify(updatedTypes))
             }
-            renderItemFilter(editState, filterName)
+            renderItemFilter(eachEditState, filterName)
             renderList(getRecipes)
         })
         .catch((e) => {

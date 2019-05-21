@@ -35,12 +35,12 @@ const pickType = (chosenName) => {
 }
 
 // [2] Generate a single DOM for each filter item
-const getItemDOM = (itemName, editState, type) => {
+const getItemDOM = (itemName, theEditState, type) => {
     const itemForm = document.createElement('form')
     itemForm.classList.add('filter__item')
     const itemNameID = itemName.toLowerCase().trim().replace(/ +/g, ' ').split(' ').join('-')
     
-    if(editState === 'off') {
+    if (theEditState === 'off') {
         let inputType;
 
         if (type ==='ingre') {
@@ -93,7 +93,7 @@ const getItemDOM = (itemName, editState, type) => {
         itemForm.appendChild(createdItem)
         itemForm.appendChild(newLabel)
 
-    } else if (editState === 'on') {
+    } else if (theEditState === 'on') {
 
         // padding 조절되는 css추가됨
         itemForm.classList.add('filter__item--edit') 
@@ -127,7 +127,7 @@ const getItemDOM = (itemName, editState, type) => {
                 localStorage.setItem('filterTypes', JSON.stringify(filterTypes))
             }
 
-            renderItemFilter(editState, type)   
+            renderItemFilter(theEditState, type)   
         })     
         itemForm.appendChild(newLabel)
         itemForm.appendChild(deleteItemBtn)
@@ -137,7 +137,7 @@ const getItemDOM = (itemName, editState, type) => {
 }
 
 // [1] Render Filter Items
-const renderItemFilter = (editState, type) => {
+const renderItemFilter = (stateOfEdit, type) => {
     
     const filterItems = type === 'ingre' 
     ? getFilterIngre()
@@ -147,16 +147,16 @@ const renderItemFilter = (editState, type) => {
     itemArea.innerHTML = ''
 
     filterItems.forEach((item) => {
-        return itemArea.appendChild(getItemDOM(item.name, editState, type))
+        return itemArea.appendChild(getItemDOM(item.name, stateOfEdit, type))
     })
 
     const newItemForm = document.querySelector(`#new${type.charAt(0).toUpperCase() + type.slice(1)}Form`)
     const ingredients = document.querySelector('#ingredients')
 
-    if (editState === 'on') {
+    if (stateOfEdit === 'on') {
         if(type === 'ingre') {ingredients.classList.add('isEditOn')}
         newItemForm.classList.add('isEditOn')
-    } else if (editState === 'off') {
+    } else if (stateOfEdit === 'off') {
         if(type === 'ingre') {ingredients.classList.remove('isEditOn')}
         newItemForm.classList.remove('isEditOn')
     }
@@ -164,21 +164,26 @@ const renderItemFilter = (editState, type) => {
 
 
 const handleAddFilter = (type) => {
+    console.log('type', type, editState.type)
     let Item;
-    type === 'ingre' ? Item = 'Ingre' : Item = 'Type'
+    if(type === 'ingre') {
+        Item = 'Ingre'
+    } else {
+        Item = 'Type'
+    }
 
     document.querySelector(`#new${Item}Form`).addEventListener('submit', (e) => {
         e.preventDefault()
+        console.log('submitted', 'Yes', editState.type)
 
         const inputText = type === 'ingre' ? e.target.elements.newIngre.value : e.target.elements.newType.value
         const revisedInput = inputText.toLowerCase().trim().replace(/ +/g, ' ').split(' ').join('-')
-        
-        if (revisedInput == 0) {return false}
+
+        if (revisedInput.length === 0) {return false}
         const newItem = {
             name: revisedInput,
             chosen: false
         }
-
         if(type === 'ingre') {
             filterIngre.push(newItem)  
             localStorage.setItem('filterIngre', JSON.stringify(filterIngre))
@@ -189,6 +194,8 @@ const handleAddFilter = (type) => {
             renderItemFilter(editState.type, type)
         }
         document.querySelector(`#new${Item}Input`).value = ''
+        console.log('type', type, editState.type)
+
     })
 }
 

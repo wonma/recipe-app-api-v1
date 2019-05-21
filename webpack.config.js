@@ -29,7 +29,7 @@ module.exports = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),  // what to serve, absolute path
-        publicPath: '/scripts/'  // public기준으로 어딜가야 webpack이 감지할 파일(assets)있는지
+        publicPath: '/scripts/',  // public기준으로 어딜가야 webpack이 감지할 파일(assets)있는지
     },
     devtool: 'source-map'
 }
